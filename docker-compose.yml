@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  web:
+    build: ./python-app
+    ports:
+     - 5000:5000
+
+  db:
+    image: postgres:alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
+
+volumes:
+  postgres_data:
