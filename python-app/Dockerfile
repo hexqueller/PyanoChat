@@ -1,6 +1,4 @@
-FROM python:alpine
-
-RUN apk add --no-cache postgresql-dev gcc musl-dev
+FROM python:latest
 
 WORKDIR /app
 

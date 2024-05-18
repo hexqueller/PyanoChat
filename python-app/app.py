@@ -3,8 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']db = SQLAlchemy()
+db.init_app(app)
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,4 +27,5 @@ def add_message():
     return jsonify({'id': m.id}), 201
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(host='0.0.0.0', port=5000)
