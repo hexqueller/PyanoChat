@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anonymous Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #messages {
+      padding: 20px;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Anonymous Chat</h1>
+  <div id="messages">
+    <!-- messages will be displayed here -->
+  </div>
+  <form id="message-form">
+    <input type="text" id="message-input" placeholder="Type a message...">
+    <button id="send-button">Send</button>
+  </form>
+
+  <script>
+    const messageForm = document.getElementById('message-form');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+    const messagesDiv = document.getElementById('messages');
+
+    messageForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const messageText = messageInput.value.trim();
+      if (messageText) {
+        fetch('/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ text: messageText })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          const messageHTML = `
+            <div class="message">
+              <p>${data.text}</p>
+            </div>
+          `;
+          messagesDiv.innerHTML += messageHTML;
+          messageInput.value = '';
+        })
+        .catch((error) => console.error(error));
+      }
+    });
+
+    fetch('/messages')
+      .then((response) => response.json())
+      .then((data) => {
+        data.forEach((message) => {
+          const messageHTML = `
+            <div class="message">
+              <p>${message.text}</p>
+            </div>
+          `;
+          messagesDiv.innerHTML += messageHTML;
+        });
+      })
+      .catch((error) => console.error(error));
+  </script>
+</body>
+</html>
