@@ -1,11 +1,6 @@
 version: '3'
 
 services:
-  web:
-    build: ./python-app
-    ports:
-      - 5000:5000
-
   db:
     image: postgres:alpine
     volumes:
@@ -13,16 +8,32 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydb
+
+  web:
+    build:
+      context: ./python-app
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/mydb
 
   site:
     build: ./nginx
     ports:
       - 80:80
+    depends_on:
+      - web
 
   adminer:
     image: adminer:latest
     ports:
       - 8080:8080
+    depends_on:
+      - db
 
 volumes:
   postgres_data:
