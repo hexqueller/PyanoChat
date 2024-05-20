@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -13,18 +13,20 @@ class Message(db.Model):
     def __repr__(self):
         return f'<Message {self.id}>'
 
-@app.route('/messages', methods=['GET'])
-def get_messages():
+@app.route('/')
+def index():
     messages = Message.query.all()
-    return jsonify([{'id': m.id, 'text': m.text} for m in messages])
+    return render_template('index.html', messages=messages)
 
-@app.route('/messages', methods=['POST'])
-def add_message():
-    text = request.json['text']
-    m = Message(text=text)
-    db.session.add(m)
-    db.session.commit()
-    return jsonify({'id': m.id}), 201
+@app.route('/create', methods=['GET', 'POST'])
+def create_message():
+    if request.method == 'POST':
+        text = request.form['text']
+        m = Message(text=text)
+        db.session.add(m)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('create.html')
 
 if __name__ == '__main__':
     db.create_all()
