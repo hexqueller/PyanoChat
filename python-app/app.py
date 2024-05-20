@@ -7,6 +7,7 @@ import pytz
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.static_folder = 'static'
 db = SQLAlchemy(app)
 
 class Message(db.Model):
