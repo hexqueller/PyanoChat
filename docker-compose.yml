@@ -12,6 +12,7 @@ services:
 
   web:
     build: ./python-app
+    restart: always
     depends_on:
       - db
     environment:

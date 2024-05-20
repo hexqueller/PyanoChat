@@ -10,10 +10,10 @@
         <th>Сообщение</th>
         <th>Дата и время</th>
       </tr>
-      {% for message in messages %}
+      {% for message, formatted_date in messages %}
       <tr>
         <td>{{ message.text }}</td>
-        <td>{{ message.created_at }}</td>
+        <td>{{ formatted_date }}</td>
       </tr>
       {% endfor %}
     </table>
