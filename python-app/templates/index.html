@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Messages</title>
+    <title>PyanoChat</title>
   </head>
   <body>
-    <h1>Messages</h1>
-    <ul>
+    <h1>PyanoChat</h1>
+    <table border="1">
+      <tr>
+        <th>Сообщение</th>
+        <th>Дата и время</th>
+      </tr>
       {% for message in messages %}
-        <li>{{ message.text }}</li>
+      <tr>
+        <td>{{ message.text }}</td>
+        <td>{{ message.created_at }}</td>
+      </tr>
       {% endfor %}
-    </ul>
+    </table>
+    <p><a href="{{ url_for('create_message') }}"><button>Создать новое сообщение</button></a></p>
   </body>
 </html>
