@@ -4,7 +4,14 @@
     <title>PyanoChat</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
     <style>
-      /* добавляем стили для таблицы */
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
       table {
         border-collapse: collapse;
         width: 100%;
@@ -17,7 +24,6 @@
       th {
         background-color: #f0f0f0;
       }
-      /* добавляем стили для кнопки */
       button {
         background-color: #4CAF50;
         color: #fff;
@@ -32,32 +38,31 @@
     </style>
   </head>
   <body>
-    <header>
-      <h1>PyanoChat</h1>
-    </header>
-    <main>
-      <section>
-        <h2>Сообщения</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Сообщение</th>
-              <th>Дата и время</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for message, formatted_date in messages %}
-            <tr>
-              <td>{{ message.text }}</td>
-              <td>{{ formatted_date }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </section>
-      <section>
-        <p><a href="{{ url_for('create_message') }}"><button>Создать новое сообщение</button></a></p>
-      </section>
-    </main>
+    <div class="container">
+      <header>
+        <h1>PyanoChat</h1>
+      </header>
+      <main>
+        <section>
+          <p><a href="{{ url_for('create_message') }}"><button>Написать</button></a></p>
+          <table>
+            <thead>
+              <tr>
+                <th>Сообщение</th>
+                <th>Дата и время</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for message, formatted_date in messages %}
+              <tr>
+                <td>{{ message.text }}</td>
+                <td>{{ formatted_date }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
   </body>
 </html>

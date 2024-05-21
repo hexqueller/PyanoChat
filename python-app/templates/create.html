@@ -2,13 +2,59 @@
 <html>
   <head>
     <title>Создать новое сообщение</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      label {
+        margin-bottom: 10px;
+      }
+      input[type="text"] {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    </style>
   </head>
   <body>
-    <h1>Создать новое сообщение</h1>
-    <form action="" method="post">
-      <label for="text">Текст сообщения:</label>
-      <input type="text" id="text" name="text"><br><br>
-      <input type="submit" value="Создать">
-    </form>
+    <div class="container">
+      <header class="header">
+        <h1>Новое сообщение</h1>
+      </header>
+      <main>
+        <form action="" method="post">
+          <label for="text">Текст сообщения:</label>
+          <input type="text" id="text" name="text"><br><br>
+          <input type="submit" value="Создать">
+        </form>
+      </main>
+    </div>
   </body>
 </html>
