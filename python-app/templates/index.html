@@ -3,21 +3,61 @@
   <head>
     <title>PyanoChat</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <style>
+      /* добавляем стили для таблицы */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #f0f0f0;
+      }
+      /* добавляем стили для кнопки */
+      button {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
   </head>
   <body>
-    <h1>PyanoChat</h1>
-    <table border="1">
-      <tr>
-        <th>Сообщение</th>
-        <th>Дата и время</th>
-      </tr>
-      {% for message, formatted_date in messages %}
-      <tr>
-        <td>{{ message.text }}</td>
-        <td>{{ formatted_date }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    <p><a href="{{ url_for('create_message') }}"><button>Создать новое сообщение</button></a></p>
+    <header>
+      <h1>PyanoChat</h1>
+    </header>
+    <main>
+      <section>
+        <h2>Сообщения</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Сообщение</th>
+              <th>Дата и время</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for message, formatted_date in messages %}
+            <tr>
+              <td>{{ message.text }}</td>
+              <td>{{ formatted_date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <p><a href="{{ url_for('create_message') }}"><button>Создать новое сообщение</button></a></p>
+      </section>
+    </main>
   </body>
 </html>
