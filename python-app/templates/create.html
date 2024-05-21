@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Создать новое сообщение</title>
+    <title>Создать сообщение</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
     <style>
       body {
-        background-color: #131516; /* новый цвет фона */
+        background-color: #131516;
       }
       .container {
         max-width: 800px;
@@ -36,9 +36,10 @@
         border: 1px solid #444;
         background-color: #444;
         color: #fff;
+        autocomplete: off;
       }
       input[type="submit"] {
-        background-color: #6c5ce7; /* фиолетовый цвет */
+        background-color: #6c5ce7;
         color: #fff;
         padding: 10px 20px;
         border: none;
@@ -46,7 +47,7 @@
         cursor: pointer;
       }
       input[type="submit"]:hover {
-        background-color: #5c4ccf; /* фиолетовый цвет на hover */
+        background-color: #5c4ccf;
       }
     </style>
   </head>
@@ -58,7 +59,7 @@
       <main>
         <form action="" method="post">
           <label for="text">Текст сообщения:</label>
-          <input type="text" id="text" name="text"><br><br>
+          <input type="text" id="text" name="text" autocomplete="off"><br><br>
           <input type="submit" value="Создать">
         </form>
       </main>
